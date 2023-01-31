@@ -24,7 +24,7 @@ class Card implements cloneable
         l.info("Enter the Expired Date");
         validTo = s.nextLine();
     }
-    //This method calls Object clone();
+    //This method calls Object clone().
     Card cloneCard(){
         try{
             //call clone in object.
