@@ -16,7 +16,7 @@ class Process
     String studentname;
     int total;
     String gradelevel;
-    public int gpa = 0 ;
+    int gpa = 0 ;
     Process(String sname, int tol)
     {
         studentname = sname;
