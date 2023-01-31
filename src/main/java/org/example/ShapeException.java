@@ -8,8 +8,7 @@ class Triangle
     int h;
     int a;
     int c;
-    String mylogger = "com.api.jar";
-    Logger l = Logger.getLogger(mylogger);
+    Logger l = Logger.getLogger("com.api.jar");
     Triangle(int base, int height, int side1, int side2)
     {
         b = base;
@@ -31,8 +30,7 @@ class Rectangle
 {
     int b;
     int l;
-    String mylogger = "com.api.jar";
-    Logger l1 = Logger.getLogger(mylogger);
+    Logger l1 = Logger.getLogger("com.api.jar");
     Rectangle(int width, int length)
     {
         b = width;
@@ -51,8 +49,7 @@ class Rectangle
 class Circle
 {
     int r;
-    String mylogger = "com.api.jar";
-    Logger l = Logger.getLogger(mylogger);
+    Logger l = Logger.getLogger("com.api.jar");
     Circle(int radius)
     {
         r = radius;
@@ -70,9 +67,10 @@ class Circle
 class ShapeException{
     public static void main (String[] args)
     {
-        String mylogger = "com.api.jar";
-        Logger l = Logger.getLogger(mylogger);
+
+        Logger l = Logger.getLogger("com.api.jar");
         Scanner s = new Scanner(System.in);
+        String error = "The Class Not Found";
    
         while(true)
         {
@@ -95,10 +93,10 @@ class ShapeException{
                 try {
                     Class.forName("org.example.Triangle");
                     Triangle t = new Triangle(base, height, side1, side2);
-                    l.info("the perimeter of Triangle :" + t.perimeter());
-                    l.info("the area of Triangle :" + t.area());
+                    l.log(Level.INFO, () -> "the perimeter of Triangle :" + t.perimeter());
+                    l.log(Level.INFO, () -> "the area of Triangle :" + t.area());
                 }catch (ClassNotFoundException e){
-                    l.log(Level.INFO, () -> "This class is not found. " + e);
+                    l.log(Level.INFO, () -> error + e);
                 }
             }
             else if(ch == 2)
@@ -111,10 +109,10 @@ class ShapeException{
                 try {
                     Class.forName("org.example.Triangle");
                     Rectangle  r = new Rectangle(width, length);
-                    l.info("the perimeter of Rectangle :" + r.perimeter());
-                    l.info("the area  of Rectangle:" + r.area());
+                    l.log(Level.INFO, () -> "the perimeter of Rectangle :" + r.perimeter());
+                    l.log(Level.INFO, () -> ("the area  of Rectangle:" + r.area());
                 }catch (ClassNotFoundException e){
-                    l.log(Level.INFO, () -> "This class is not found. " + e);
+                    l.log(Level.INFO, () -> error + e);
                 }
             }
             else if(ch == 3)
@@ -124,10 +122,10 @@ class ShapeException{
                 try {
                     Class.forName("org.example.Circle");
                     Circle c = new Circle(radius);
-                    l.info("the perimeter of Circle :" + c.perimeter());
-                    l.info("the area of Circle:" + c.area());
+                    l.log(Level.INFO, () -> "the perimeter of Circle :" + c.perimeter());
+                    l.log(Level.INFO, () -> "the area of Circle:" + c.area());
                 }catch (ClassNotFoundException e){
-                    l.log(Level.INFO, () -> "This class is not found. " + e);
+                    l.log(Level.INFO, () -> error + e);
                 }
 
             }
