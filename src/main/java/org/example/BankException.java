@@ -2,15 +2,15 @@ package org.example;
 
 import java.util.logging.*;
 import java.util.*;
-import java.lang.*;
+
 
 class Payment
 {
     static Logger l=Logger.getLogger("My Logger");
     Payment (String name, int no)
     {
-        l.info ("Hii\t" + name + "\tyour account will be created.");
-        l.info ("Your account No is\t" + no);
+        l.log(Level.INFO, () ->"Hii\t" + name + "\tyour account will be created.");
+        l.log(Level.INFO, () ->"Your account No is\t" + no);
     }
 
     double deposit (double d, double balance)
@@ -27,7 +27,7 @@ class Payment
 
     void amount (double balance)
     {
-        l.info ("Your Current Balance :" + balance);
+        l.log(Level.INFO, () ->"Your Current Balance :" + balance);
     }
 
 }
@@ -40,42 +40,43 @@ class BankException
         Logger l=Logger.getLogger("My Logger");
 
         l.info("Enter the Holder Name:");
-        String h_name = s.nextLine ();
+        String hname = s.nextLine ();
 
         l.info("Enter the Account Number:");
-        int a_no = 0;
+        int ano = 0;
         try {
-            a_no = s.nextInt();
+            ano = s.nextInt();
         }catch (InputMismatchException e){
             l.log(Level.INFO, () -> "User only input in Integer Value." + e);
             System.exit(0);
         }
 
         double balance = 0.0;
-        double d_amt;
-        double w_amt;
+        double damt;
+        double wamt;
 
-        Payment p = new Payment (h_name, a_no);
+        Payment p = new Payment (hname, ano);
 
         while(true)
         {
             l.info("select your payment method \n1. Deposit \n2. Withdraw \n3. Balance \n0.Exit");
             int ch = s.nextInt ();
+            String currentBalance = "Your Current Balance :";
             switch (ch) {
                 case 1 -> {
                     l.info("Your Deposit Amount :");
-                    d_amt = s.nextDouble();
-                    balance = p.deposit(d_amt, balance);
-                    l.info("Your Current Balance :" + balance);
+                    damt = s.nextDouble();
+                    balance = p.deposit(damt, balance);
+                    l.log(Level.INFO, () ->currentBalance + balance);
                 }
                 case 2 -> {
                     l.info("Your Withdraw Amount :");
-                    w_amt = s.nextDouble();
-                    if (balance < w_amt) {
-                        l.info("Your Amount balance : " + balance + ". so, didn't withdraw Amount.");
+                    wamt = s.nextDouble();
+                    if (balance < wamt) {
+                        l.log(Level.INFO, () ->"Your Amount balance : " + balance + ". so, didn't withdraw Amount.");
                     } else {
-                        balance = p.withdraw(w_amt, balance);
-                        l.info("Your Current Balance :" + balance);
+                        balance = p.withdraw(wamt, balance);
+                        l.log(Level.INFO, () ->currentBalance + balance);
                     }
                 }
                 case 3 -> p.amount(balance);
